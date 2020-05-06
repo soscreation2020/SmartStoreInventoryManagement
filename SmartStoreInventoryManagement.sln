@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartStoreInventoryManagement.Web", "SmartStoreInventoryManagement.Web\SmartStoreInventoryManagement.Web.csproj", "{050374DA-E638-44E7-B6F1-DEA69EBB2939}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartStoreInventoryManagement.Core", "SmartStoreInventoryManagement.Core\SmartStoreInventoryManagement.Core.csproj", "{E90C7493-A8EB-4350-989F-2A3F383AF6EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{050374DA-E638-44E7-B6F1-DEA69EBB2939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050374DA-E638-44E7-B6F1-DEA69EBB2939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050374DA-E638-44E7-B6F1-DEA69EBB2939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050374DA-E638-44E7-B6F1-DEA69EBB2939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E90C7493-A8EB-4350-989F-2A3F383AF6EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E90C7493-A8EB-4350-989F-2A3F383AF6EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E90C7493-A8EB-4350-989F-2A3F383AF6EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E90C7493-A8EB-4350-989F-2A3F383AF6EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAB4BA3A-97DF-4131-8CCE-682B0758A91F}
+	EndGlobalSection
+EndGlobal
