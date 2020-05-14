@@ -1,0 +1,56 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <a ui-sref="add-new-category" class="card-title" data-toggle="modal" data-target="#con-close-modal">Add Category</a>
+                <h4>Danger Table</h4>
+                <div class="col-md-6">
+                    <form role="form" ng-submit="search($event,'@Url.Content("~/api/Category/GetAllCategory")')">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="example-input1-group2" name="Keyword" class="form-control" placeholder="Search with Keword" type="text">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn waves-effect waves-light btn-pink"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <h6 class="card-subtitle">Add class <code>.color-table .danger-table</code></h6>
+                <div class="table-responsive">
+                    <table class="table color-table danger-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Action</th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr dir-paginate="cat in categoryList | itemsPerPage:pageSize" total-items="total" current-page="pageIndex">
+                                <td scope="row">{{$index + 1}}</td>
+                                <td scope="row">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a ui-sref="edit-new-category({id:cat.Id})" class="dropdown-item" href="javascript:void(0);">Update</a>
+                                            <a class="dropdown-item" ng-click="deleteCategory('@Url.Content("~/api/Category/Delete")',cat.Id)" href="javascript:void(0);">Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{cat.CategorNumber}}</td>
+                                <td>{{car.Name}}</td>
+                                <td>{{cat.Description}}</td>
+                            </tr>
+                        </tbody>
+                        <dir-pagination-controls on-page-change="pageChange('@Url.Content("~/api/Category/GetAllCategory")')"></dir-pagination-controls>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

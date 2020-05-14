@@ -19,6 +19,154 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Bank", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AbbrCode")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(350)")
+                        .HasMaxLength(350);
+
+                    b.Property<string>("RegNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Bank");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.BankAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AccountNo")
+                        .HasColumnType("nvarchar(13)")
+                        .HasMaxLength(13);
+
+                    b.Property<Guid?>("Bank_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RegNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Bank_Id");
+
+                    b.ToTable("BankAccount");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Branch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("Department_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("RegNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Department_Id");
+
+                    b.ToTable("Branch");
+                });
+
             modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -197,6 +345,52 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("RegNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Department");
+                });
+
             modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.MyAppRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -228,28 +422,28 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                         new
                         {
                             Id = new Guid("a1b6b6b0-0825-4975-a93d-df3dc86f8cc7"),
-                            ConcurrencyStamp = "236b682f3a444788aa7f8b4d4de8ef37",
+                            ConcurrencyStamp = "1f6271a420094f2ca217f481366853db",
                             Name = "SYS_ADMIN",
                             NormalizedName = "SYS_ADMIN"
                         },
                         new
                         {
                             Id = new Guid("0718ddef-4067-4f29-aaa1-98c1548c1807"),
-                            ConcurrencyStamp = "97dd81f0508145a9981b25c741ae482f",
+                            ConcurrencyStamp = "8a58764e2a8b4431bbd522cbe2c6de28",
                             Name = "SUPER_ADMIN",
                             NormalizedName = "SUPER_ADMIN"
                         },
                         new
                         {
                             Id = new Guid("8b93d395-a71a-4620-9352-5b9e6b3b6045"),
-                            ConcurrencyStamp = "bb68078c46e04a94b2f95d4da7994d0c",
+                            ConcurrencyStamp = "b5cf881c56fd4e99b1a86a211194693c",
                             Name = "SUPERUSER",
                             NormalizedName = "SUPERUSER"
                         },
                         new
                         {
                             Id = new Guid("02bde570-4aa8-4c60-a462-07154aa69520"),
-                            ConcurrencyStamp = "c0fb1a26e17947cb8c77a027365b204e",
+                            ConcurrencyStamp = "5a3aece0a49649569681a2045f0b1310",
                             Name = "STAFF_USER",
                             NormalizedName = "STAFF_USER"
                         });
@@ -401,7 +595,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             AccessFailedCount = 0,
                             Activated = true,
                             CanUseApplication = false,
-                            ConcurrencyStamp = "3e756485-c7db-4288-bf36-73888944b33c",
+                            ConcurrencyStamp = "4b521e51-0501-4d6a-9ab7-cf9e3a586da9",
                             CreatedOnUtc = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "system@smartstore.com",
                             EmailConfirmed = true,
@@ -414,7 +608,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SYSTEM@SMARTSTORE.COM",
                             NormalizedUserName = "SYSTEM@SMARTSTORE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPCUvYFU6L6CNxkpfAkIrg77O86IQUdn0Vsg/lt6EPAHJqdtm8v+FgaBnw6WJKbnyg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGAdckKpxpwgr3A8Xch9I6uuh+Fx5o+eRVgJ/mm4F2CFjUkX07Q3vD5r+nQuZnAP5Q==",
                             PhoneNumber = "08067623699",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "99ae0c45-d682-4542-9ba7-1281e471916b",
@@ -429,7 +623,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             AccessFailedCount = 0,
                             Activated = true,
                             CanUseApplication = false,
-                            ConcurrencyStamp = "271ca2bf-9ee7-458f-9f46-43e57bce4a7b",
+                            ConcurrencyStamp = "1385f44e-1bb6-4d23-af3c-ef989f238eef",
                             CreatedOnUtc = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "superadmin@smartstore.com",
                             EmailConfirmed = true,
@@ -442,7 +636,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@SMARTSTORE.COM",
                             NormalizedUserName = "SUPERADMIN@SMARTSTORE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEh8MTEG+psrvl1bZ1zsFiedP5o61tTKghBfsUnb4kwuwI8VvI0A56IrttVGVCLGTA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAwmW6A/kkCW3Yyi+dG+bUu1ZJfZSEztdYyG+l5mXrDGLLBBArOI6T0bFPk/E0rY9w==",
                             PhoneNumber = "08067623699",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "016020e3-5c50-40b4-9e66-bba56c9f5bf2",
@@ -457,7 +651,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             AccessFailedCount = 0,
                             Activated = true,
                             CanUseApplication = false,
-                            ConcurrencyStamp = "43db738c-a0f2-462c-b998-2716fc04e348",
+                            ConcurrencyStamp = "86bf7631-1918-4bf0-8797-e978c34b7d95",
                             CreatedOnUtc = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "storemanager@vericore.com",
                             EmailConfirmed = true,
@@ -470,7 +664,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STOREMANAGER@VERICORE.COM",
                             NormalizedUserName = "STOREMANAGER@VERICORE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEhCB0MAR31LnATGRM0QsgteAyGn/VKq6CJNNNI+mJPLhselT3V/Z2QvZk0SfyOLBQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHAxP1WGMw/9MlmTMot1DH8wALM5X8MfHThtf0Ocn6NlLbRAzRV/36Wa7K5Z99b5Zw==",
                             PhoneNumber = "08062066851",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "7d728c76-1c51-491a-99db-bde6a5b0655b",
@@ -485,7 +679,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             AccessFailedCount = 0,
                             Activated = true,
                             CanUseApplication = false,
-                            ConcurrencyStamp = "8fc81bbc-16b6-4455-b8bf-e52dfd9c3709",
+                            ConcurrencyStamp = "54a92bbe-7c40-4dc5-b1fc-99f0c354728b",
                             CreatedOnUtc = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "staff@smartstore.com",
                             EmailConfirmed = true,
@@ -498,7 +692,7 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STAFF@SMARTSTORE.COM",
                             NormalizedUserName = "STAFF@SMARTSTORE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHSdHo6UH+3EIuEaxyw3X4d7ca2+F//Eo7SNQ0xBi1ERzZSGl8b+UtbdjO5Puv4AgQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOg1L7YhoXCc585BvMQTvnwpYrySIoAd1a+KqoNU8coXmvclVlkez8v2BAtR8aM7QA==",
                             PhoneNumber = "08062066851",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "953d3fd1-99e3-4fe7-a20d-3598baa96099",
@@ -630,11 +824,17 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Barcode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("Category_Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(150)")
@@ -659,6 +859,9 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
+                    b.Property<decimal>("DiscountRate")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -678,9 +881,6 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.Property<int>("Period")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ProductLocation_Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ProductNo")
                         .HasColumnType("nvarchar(max)");
 
@@ -690,17 +890,32 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.Property<string>("RFID")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReOrderPoint")
+                        .HasColumnType("int");
+
                     b.Property<string>("ReasonForInactivity")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SellEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SellStartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SerialNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("Staff_Id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<decimal?>("StandardCost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool>("StockOutWarning")
-                        .HasColumnType("bit");
+                    b.Property<int>("StockOutWarning")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Style")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TagNumber")
                         .HasColumnType("nvarchar(max)");
@@ -714,6 +929,9 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.Property<decimal?>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("VATRate")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("productType")
                         .HasColumnType("int");
 
@@ -724,9 +942,9 @@ namespace SmartStoreInventoryManagement.Core.Migrations
 
                     b.HasIndex("Category_Id");
 
-                    b.HasIndex("ProductLocation_Id");
-
                     b.HasIndex("ProductShelf_Id");
+
+                    b.HasIndex("Staff_Id");
 
                     b.HasIndex("UnitOfMeasure_Id");
 
@@ -737,6 +955,9 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("Branch_Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreateOn")
@@ -753,6 +974,9 @@ namespace SmartStoreInventoryManagement.Core.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("Department_Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(300)")
@@ -771,10 +995,46 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 
+                    b.Property<Guid?>("PreviousBranch_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PreviousStore_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("ProductSold")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("Product_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("QuantityTransfered")
+                        .HasColumnType("int");
+
                     b.Property<string>("RegNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("Store_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("TransferDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Branch_Id");
+
+                    b.HasIndex("Department_Id");
+
+                    b.HasIndex("PreviousBranch_Id");
+
+                    b.HasIndex("PreviousStore_Id");
+
+                    b.HasIndex("Product_Id");
+
+                    b.HasIndex("Store_Id");
 
                     b.ToTable("ProductLocation");
                 });
@@ -825,14 +1085,14 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.ToTable("ProductShelf");
                 });
 
-            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Staff", b =>
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.PurchaseOder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("Branch_Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreateOn")
                         .HasColumnType("datetime2");
@@ -848,6 +1108,330 @@ namespace SmartStoreInventoryManagement.Core.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PurchaseOrderID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SupplyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TaxAmt")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("UserCreatedBy_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("Vendor_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Branch_Id");
+
+                    b.HasIndex("UserCreatedBy_Id");
+
+                    b.HasIndex("Vendor_Id");
+
+                    b.ToTable("PurchaseOder");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.PurchaseOrderDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderDetailNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("OrderQuantity")
+                        .HasColumnType("real");
+
+                    b.Property<Guid?>("Product_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PurchaseOder_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("TaxValue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<float>("VAT")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Product_Id");
+
+                    b.HasIndex("PurchaseOder_Id");
+
+                    b.ToTable("PurchaseOrderDetail");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.RequestOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("ExpectedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestNumber")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<Guid?>("Store_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserCreatedBy_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Store_Id");
+
+                    b.HasIndex("UserCreatedBy_Id");
+
+                    b.ToTable("RequestOrder");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.RequestOrderDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderDetailNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("Product_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("QuantityReleased")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantityRequest")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("RequestOrder_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Product_Id");
+
+                    b.HasIndex("RequestOrder_Id");
+
+                    b.ToTable("RequestOrderDetail");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.SellingPrice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<string>("PriceNumber")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<Guid?>("Product_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("SettingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UserCreatedBy_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Product_Id");
+
+                    b.HasIndex("UserCreatedBy_Id");
+
+                    b.ToTable("SellingPrice");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Staff", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("Branch_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("Department_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -882,6 +1466,10 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Branch_Id");
+
+                    b.HasIndex("Department_Id");
 
                     b.HasIndex("User_Id");
 
@@ -933,6 +1521,101 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                             Title = "Mr",
                             User_Id = new Guid("129712e3-9214-4dd3-9c03-cfc4eb9ba979")
                         });
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Store", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("Branch_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("Department_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<Guid?>("ProductLocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ProductShelf_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ProductStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("Product_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("StoreNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserCreatedBy_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Branch_Id");
+
+                    b.HasIndex("Department_Id");
+
+                    b.HasIndex("ProductLocationId");
+
+                    b.HasIndex("ProductShelf_Id");
+
+                    b.HasIndex("Product_Id");
+
+                    b.HasIndex("UserCreatedBy_Id");
+
+                    b.ToTable("Store");
                 });
 
             modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.UnitOfMeasure", b =>
@@ -1059,6 +1742,108 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.ToTable("Vendor");
                 });
 
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Voucher", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("AmountReleased")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("BankAccount_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("Bank_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("Branch_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChequeNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LPO")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PaidStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UserCreatedBy_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ValueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("Vendor_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("VoucherNumber")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankAccount_Id");
+
+                    b.HasIndex("Bank_Id");
+
+                    b.HasIndex("Branch_Id");
+
+                    b.HasIndex("UserCreatedBy_Id");
+
+                    b.HasIndex("Vendor_Id");
+
+                    b.ToTable("Voucher");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.BankAccount", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Bank", "Bank")
+                        .WithMany("BankAccount")
+                        .HasForeignKey("Bank_Id");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Branch", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("Department_Id");
+                });
+
             modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.MyAppRoleClaim", b =>
                 {
                     b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppRole", null)
@@ -1116,26 +1901,147 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                         .WithMany()
                         .HasForeignKey("Category_Id");
 
-                    b.HasOne("SmartStoreInventoryManagement.Core.Models.ProductLocation", "ProductLocation")
-                        .WithMany()
-                        .HasForeignKey("ProductLocation_Id");
-
                     b.HasOne("SmartStoreInventoryManagement.Core.Models.ProductShelf", "ProductShelf")
                         .WithMany()
                         .HasForeignKey("ProductShelf_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("Staff_Id");
 
                     b.HasOne("SmartStoreInventoryManagement.Core.Models.UnitOfMeasure", "UnitOfMeasure")
                         .WithMany()
                         .HasForeignKey("UnitOfMeasure_Id");
                 });
 
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.ProductLocation", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("Branch_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("Department_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Branch", "PreviousBranch")
+                        .WithMany()
+                        .HasForeignKey("PreviousBranch_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Store", "PreviousStore")
+                        .WithMany()
+                        .HasForeignKey("PreviousStore_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Product_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("Store_Id");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.PurchaseOder", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("Branch_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "UserCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("UserCreatedBy_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("Vendor_Id");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.PurchaseOrderDetail", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Product_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.PurchaseOder", "PurchaseOder")
+                        .WithMany("LineItems")
+                        .HasForeignKey("PurchaseOder_Id");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.RequestOrder", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("Store_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "UserCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("UserCreatedBy_Id");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.RequestOrderDetail", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Product_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.RequestOrder", "RequestOrder")
+                        .WithMany("RequestItems")
+                        .HasForeignKey("RequestOrder_Id");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.SellingPrice", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Product_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "UserCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("UserCreatedBy_Id");
+                });
+
             modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Staff", b =>
                 {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("Branch_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("Department_Id");
+
                     b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "User")
                         .WithMany()
                         .HasForeignKey("User_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Store", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("Branch_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("Department_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.ProductLocation", null)
+                        .WithMany("Stores")
+                        .HasForeignKey("ProductLocationId");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.ProductShelf", "ProductShelf")
+                        .WithMany()
+                        .HasForeignKey("ProductShelf_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("Product_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "UserCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("UserCreatedBy_Id");
                 });
 
             modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Vendor", b =>
@@ -1149,6 +2055,29 @@ namespace SmartStoreInventoryManagement.Core.Migrations
                     b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "MyAppUser")
                         .WithMany()
                         .HasForeignKey("MyAppUserId");
+                });
+
+            modelBuilder.Entity("SmartStoreInventoryManagement.Core.Models.Voucher", b =>
+                {
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.BankAccount", "BankAccount")
+                        .WithMany()
+                        .HasForeignKey("BankAccount_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Bank", "Bank")
+                        .WithMany()
+                        .HasForeignKey("Bank_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("Branch_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.MyAppUser", "UserCreatedBy")
+                        .WithMany()
+                        .HasForeignKey("UserCreatedBy_Id");
+
+                    b.HasOne("SmartStoreInventoryManagement.Core.Models.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("Vendor_Id");
                 });
 #pragma warning restore 612, 618
         }

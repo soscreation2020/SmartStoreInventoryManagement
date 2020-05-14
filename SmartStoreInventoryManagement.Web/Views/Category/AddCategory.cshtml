@@ -1,0 +1,50 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Add Category</h4>
+            </div>
+            <div class="card-body">
+                <form id="category" name="category" method="post"novalidate role="form" ng-submit="saveCategory($event,'@Url.Content("~/api/Category/SetupCategory")')">
+                    <div class="form-body">
+                        <h3 class="card-title">Person Info</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Cat Number</label>
+                                    <input type="text" id="CategorNumber" class="form-control" name="CategorNumber" ng-model="cat.CategorNumber" placeholder="John doe">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Cat Number</label>
+                                    <input type="text" id="Name" class="form-control" name="Name" ng-model="cat.Name">
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title m-t-40">Address</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <input type="text"id="Description" class="form-control" name="Description" ng-model="cat.Description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                        <button type="button" class="btn btn-inverse">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+<!-- Row -->

@@ -1,22 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmartStoreInventoryManagement.Core.EF;
 using SmartStoreInventoryManagement.Core.EF.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartStoreInventoryManagement.Core.Reposory
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly ApplicationDbContext _applicationContext;
+       // private readonly ApplicationDbContext _applicationContext;
         private readonly DbSet<TEntity> Entities;
-
-        public Repository(ApplicationDbContext applicationContext)
+        private readonly IDbContext _context;
+        public Repository(IDbContext context)
         {
-            _applicationContext = applicationContext;
-            Entities = this._applicationContext.Set<TEntity>();
+            //_applicationContext = applicationContext;
+            _context = context;
+            Entities = _context.Set<TEntity>();
+
         }
 
         //protected virtual DbSet<TEntity> Entitiess
@@ -32,7 +36,7 @@ namespace SmartStoreInventoryManagement.Core.Reposory
             if (entity == null)
                 throw new ArgumentNullException("entity");
             Entities.Add(entity);
-            _applicationContext.SaveChanges();
+            _context.SaveChanges();
 
         }
         public virtual void Create(IEnumerable<TEntity> entities)
@@ -42,14 +46,14 @@ namespace SmartStoreInventoryManagement.Core.Reposory
 
             foreach (var entity in entities)
                 Entities.Add(entity);
-            _applicationContext.SaveChanges();
+            _context.SaveChanges();
         }
         public void Delete(TEntity entity)
         {
             if (entity == null)
                 throw new NotImplementedException("entity");
             Entities.Remove(entity);
-            _applicationContext.SaveChanges();
+            _context.SaveChanges();
         }
         public virtual void Delete(IEnumerable<TEntity> entities)
         {
@@ -60,7 +64,7 @@ namespace SmartStoreInventoryManagement.Core.Reposory
             foreach (var entity in entities)
                 Entities.Remove(entity);
 
-            _applicationContext.SaveChanges();
+            _context.SaveChanges();
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -77,8 +81,9 @@ namespace SmartStoreInventoryManagement.Core.Reposory
         {
             if (entity == null)
                 throw new ArgumentNullException("entity");
-            Entities.Attach(entity);
-            _applicationContext.Entry(entity).State = EntityState.Modified;
+            //Entities.Attach(entity);
+            //_context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
         }
         public virtual int Count(Expression<Func<TEntity, bool>> predicate)
         {
@@ -168,7 +173,40 @@ namespace SmartStoreInventoryManagement.Core.Reposory
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TEntity> SqlQuery(string sql, params object[] parameters)
+        //public IEnumerable<TEntity> SqlQuery(string sql, params object[] parameters)
+        //{
+        //    try {
+        //        return SqlQuery(sql, parameters);
+        //    } catch {
+
+
+        //    }
+
+        //}
+        public virtual IEnumerable<TEntity> SqlQuery(string sql, params object[] parameters)
+        {
+            return _context.SqlQuery<TEntity>(sql, parameters);
+        }
+        IEnumerable<TEntity> IRepository<TEntity>.SqlQuery(string sql, params object[] parameters)
+        {
+            return SqlQuery(sql, parameters);
+        }
+        public void Insert(TEntity entity)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<TEntity> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PaginatedList<TEntity>> GetAllAsync(int pageIndex, int pageSize, Expression<Func<TEntity, Guid>> keySelector, Expression<Func<TEntity, bool>> predicate, OrderBy orderBy, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             throw new NotImplementedException();
         }

@@ -1,40 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartStoreInventoryManagement.Core.EF.Context;
 using SmartStoreInventoryManagement.Core.Models;
-using SmartStoreInventoryManagement.Core.Reposory;
-using SmartStoreInventoryManagement.Core.Services;
-using SmartStoreInventoryManagement.Core.Services_Models;
-using SmartStoreInventoryManagement.Core.Services_Models.Interface;
-using SmartStoreInventoryManagement.Core.UnitOfWork;
+using SmartStoreInventoryManagement.Core.Utilities;
+using System;
 
 namespace SmartStoreInventoryManagement.Web
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<UploadSettings>(Configuration.GetSection("UploadSettings"));
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
                 var connectionstring = Configuration.GetConnectionString("Default");
@@ -46,42 +43,17 @@ namespace SmartStoreInventoryManagement.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
-            services.AddAuthentication().AddCookie(options =>
+            ConfigureAuth(services);
+            services.AddMvc(config =>
             {
-                options.LoginPath = "/Account/Login";
-                options.SlidingExpiration = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(int.Parse(Configuration["Tokens:TokenExpiry"]));
-                options.Events = new CookieAuthenticationEvents
-                {
-                    OnRedirectToLogin = ctx =>
-                    {
-                        if (ctx.Request.Path.StartsWithSegments("/api") &&
-          ctx.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        }
-                        else
-                        {
-                            ctx.Response.Redirect(ctx.RedirectUri);
-                        }
-                        return Task.FromResult(0);
-                    }
-                };
+                var policy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme, CookieAuthenticationDefaults.AuthenticationScheme)
+                                .RequireAuthenticatedUser()
+                                .Build();
 
-            });
+                config.Filters.Add(new AuthorizeFilter(policy));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IPasswordHasher<MyAppUser>, PasswordHasher<MyAppUser>>();
-           // services.AddTransient<IApplicantService, ApplicantService>();
-            services.AddScoped<IDbContext, ApplicationDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
-
-
+            ConfigureDI(services);
             services.AddIdentity<MyAppUser, MyAppRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
@@ -146,7 +118,8 @@ namespace SmartStoreInventoryManagement.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
+
             });
         }
     }

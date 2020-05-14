@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartStoreInventoryManagement.Core.UnitOfWork
 {
@@ -12,6 +13,7 @@ namespace SmartStoreInventoryManagement.Core.UnitOfWork
         void BeginTransaction();
         int Commit();
         void Rollback();
+        Task<int> SaveChangesAsync();
         //bool HasTransaction { get; }
     }
 }

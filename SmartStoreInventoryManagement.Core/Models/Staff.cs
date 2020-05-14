@@ -1,4 +1,4 @@
-﻿using SmartStoreInventoryManagement.Core.Enum;
+﻿using SmartStoreInventoryManagement.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,10 +13,16 @@ namespace SmartStoreInventoryManagement.Core.Models
         [ForeignKey(nameof(User_Id))]
         public MyAppUser User { get; set; }
         public string StaffNo { get; set; }
-
+        public Guid? Branch_Id { get; set; }
+        [ForeignKey("Branch_Id")]
+        public Branch Branch { get; set; }
+        public Guid? Department_Id { get; set; }
+        [ForeignKey("Department_Id")]
+        public Department Department { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string OfficeNo { get; set; }
+        public string Email { get; set; }
         public bool Status { get; set; }
         public Staff_Type Staff_Type { get; set; }
     }

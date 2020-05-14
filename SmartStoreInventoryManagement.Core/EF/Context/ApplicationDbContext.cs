@@ -83,25 +83,24 @@ namespace SmartStoreInventoryManagement.Core.EF.Context
             }
         }
 
-        int IDbContext.SaveChanges()
-        {
-            var result = SaveChanges();
+        //int IDbContext.SaveChanges()
+        //{
+        //    var result = SaveChanges();
 
-            _transaction.Commit();
+        //    //_transaction.Commit();
 
-            ChangeTracker.DetectChanges();
+        //    //ChangeTracker.DetectChanges();
 
-            return result;
-        }
+        //    return result;
+        //}
 
         DbSet<T> IDbContext.Set<T>()
         {
             return base.Set<T>();
         }
 
-        IEnumerable<T> IDbContext.SqlQuery<T>(string sql, params object[] parameters)
-        {
-            throw new NotImplementedException();
+        IEnumerable<T> IDbContext.SqlQuery<T>(string sql, params object[] parameters)       {
+            return  Database.ExecuteSqlToObject<T>(sql, parameters).Result;
         }
 
 

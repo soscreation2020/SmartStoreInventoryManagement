@@ -13,15 +13,16 @@ using System.Threading.Tasks;
 
 namespace SmartStoreInventoryManagement.Core.Services_Models
 {
-    public class UserService : Service<MyAppUser>, IUserService
+    public class UserService :  IUserService
     {
-        private readonly IPasswordHasher<MyAppUser> _passwordHasher;
+        // private readonly IPasswordHasher<MyAppUser> _passwordHasher;
         private readonly UserManager<MyAppUser> _userManager;
         private readonly RoleManager<MyAppRole> _roleManager;
         private readonly ILogger<UserService> _logger;
-        public UserService(IPasswordHasher<MyAppUser> passwordHasher, UserManager<MyAppUser> userManager, IUnitOfWork iuow, RoleManager<MyAppRole> roleManager, ILogger<UserService> logger) : base(iuow)
+        public UserService(//IPasswordHasher<MyAppUser> passwordHasher,
+            UserManager<MyAppUser> userManager,  RoleManager<MyAppRole> roleManager, ILogger<UserService> logger) 
         {
-            _passwordHasher = passwordHasher;
+           // _passwordHasher = passwordHasher;
             _userManager = userManager;
             _roleManager = roleManager;
             _logger = logger;

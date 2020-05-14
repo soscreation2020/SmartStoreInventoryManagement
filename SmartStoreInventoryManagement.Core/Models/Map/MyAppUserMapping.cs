@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SmartStoreInventoryManagement.Core.Enum;
+using SmartStoreInventoryManagement.Core.Enums;
 using SmartStoreInventoryManagement.Core.Models.Statics;
 using System;
 using System.Collections.Generic;

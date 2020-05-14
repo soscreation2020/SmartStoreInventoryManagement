@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartStoreInventoryManagement.Core.UnitOfWork
 {
@@ -57,6 +58,11 @@ namespace SmartStoreInventoryManagement.Core.UnitOfWork
         public int SaveChanges()
         {
             return _context.SaveChanges();
+        }
+
+        public Task<int> SaveChangesAsync()
+        {
+            throw new NotImplementedException();
         }
 
         //public void Dispose()

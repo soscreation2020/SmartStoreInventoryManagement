@@ -1,0 +1,56 @@
+﻿@model SmartStoreInventoryManagement.Core.Models.Category
+@{
+    ViewData["Title"] = "EditCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header bg-danger">
+            <h4 class="m-b-0 text-white">Edit Category</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="EditCategory" method="post" id="EditCategory">
+                <div class="form-body">
+                    <h3 class="card-title">Information</h3>
+                    <hr>
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">RegNumber</label>
+                                @Html.HiddenFor(model => model.Id)
+                                <input type="hidden" asp-for="Id" />
+                                <input type="text" asp-for="CategorNumber" id="CategorNumber" class="form-control" name="CategorNumber">
+
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label"> Name</label>
+                                <input type="text" asp-for="Name" id="Name" class="form-control" name="Name">
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                    <!--/row-->
+                    @*<h3 class="box-title m-t-40">Address</h3>
+                        <hr>*@
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" asp-for="Description" id="description" class="form-control" name="description">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Edit</button>
+                    <button type="button" class="btn btn-inverse">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

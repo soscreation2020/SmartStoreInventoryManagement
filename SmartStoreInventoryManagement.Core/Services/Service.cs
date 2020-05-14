@@ -1,10 +1,13 @@
-﻿using SmartStoreInventoryManagement.Core.Reposory;
+﻿using SmartStoreInventoryManagement.Core.EF;
+using SmartStoreInventoryManagement.Core.Reposory;
 using SmartStoreInventoryManagement.Core.UnitOfWork;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SmartStoreInventoryManagement.Core.Services
 {
@@ -12,6 +15,9 @@ namespace SmartStoreInventoryManagement.Core.Services
     {
         private readonly IRepository<TEntity> _repository;
         public IUnitOfWork UnitOfWork { get; private set; }
+        protected ValidationResult resultse;
+        protected List<ValidationResult> results = new List<ValidationResult>();
+       //= new List<ValidationResult>();
 
         private bool _disposed;
         public Service(IUnitOfWork unitOfWork)
@@ -50,7 +56,7 @@ namespace SmartStoreInventoryManagement.Core.Services
             return _repository.Get(predicate, track);
         }
 
-        public virtual TEntity Find(int id)
+        public virtual TEntity Find(Guid id)
         {
             return _repository.Get(id);
         }
@@ -107,7 +113,7 @@ namespace SmartStoreInventoryManagement.Core.Services
         {
             return All(track);
         }
-        TEntity IService<TEntity>.GetById(int id)
+        TEntity IService<TEntity>.GetById(Guid id)
         {
             return Find(id);
         }
@@ -121,7 +127,25 @@ namespace SmartStoreInventoryManagement.Core.Services
         {
             Update(entity);
         }
-
+        public async Task<Int32> AddAsync(TEntity entity)
+        {
+            _repository.Insert(entity);
+            return await UnitOfWork.SaveChangesAsync();
+        }
+        public async Task<TEntity> GetByIdAsync(Guid id)
+        {
+            return await _repository.GetByIdAsync(id);
+        }
+        public async Task<Int32> DeleteAsync(TEntity entity)
+        {
+            _repository.Delete(entity);
+            return await UnitOfWork.SaveChangesAsync();
+        }
+        public async Task<Int32> UpdateAsync(TEntity entity)
+        {
+            _repository.Update(entity);
+            return await UnitOfWork.SaveChangesAsync();
+        }
         public virtual ParallelQuery<TEntity> GetPagedRecords(string procedureName, params object[] extraQueries)
         {
             var sb = new StringBuilder();
@@ -148,7 +172,10 @@ namespace SmartStoreInventoryManagement.Core.Services
         {
             return GetPagedRecords(procedure, @params);
         }
-
+        public async Task<PaginatedList<TEntity>> GetAllAsync(int pageIndex, int pageSize, Expression<Func<TEntity, Guid>> keySelector, Expression<Func<TEntity, bool>> predicate, OrderBy orderBy, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            return await _repository.GetAllAsync(pageIndex, pageSize, keySelector, predicate, orderBy, includeProperties);
+        }
         //public void Dispose()
         //{
         //    Dispose(true);

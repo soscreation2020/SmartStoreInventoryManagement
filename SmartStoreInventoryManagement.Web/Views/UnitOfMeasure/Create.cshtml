@@ -1,0 +1,117 @@
+﻿@using SmartStoreInventoryManagement.Core.ViewModel
+@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<SmartStoreInventoryManagement.Core.ViewModel.UnitOfMeasureViewModel>
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+    {
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">×</a>
+            <h4>Department Registration Errors</h4>
+            @Html.ValidationSummary(false)
+        </div>
+    }*@
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header bg-danger">
+            <h4 class="m-b-0 text-white">Add Unit of Measure</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" id="Create">
+                <div class="form-body">
+                    <h3 class="card-title">Information</h3>
+                    <hr>
+                    <div class="row p-t-20">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Symbol</label>
+                                <input type="text" @*asp-for="Symbol"*@ id="Symbol" class="form-control" name="Symbol">
+
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label"> Name</label>
+                                <input type="text" @*asp-for="Name"*@ id="Name" class="form-control" name="Name">
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+                    <!--/row-->
+                    @*<h3 class="box-title m-t-40">Address</h3>
+                        <hr>*@
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="form-group">
+                                <label>Decimals</label>
+                                <input type="text" @*asp-for="Decimals"*@ id="Decimals" class="form-control" name="Decimals">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                    <button type="button" class="btn btn-inverse">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Department List</h4>
+            <div class="table-responsive">
+                <table class="table color-table danger-table">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>RegNumber</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var dep in Model)
+                        {
+                            <tr>
+                                <td scope="row">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            @*<a asp-page="/EditDepartment" asp-route-id="@dep.id" class="dropdown-item">Edit</a><br />*@
+
+                                            <a>@Html.ActionLink("Edit", "EditUnitOfMeasure", new { Id = dep.Id })</a>
+
+                                            @*<a @Html.ActionLink("Delete", "DeleteDepartment", new { id = dep.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })></a>*@
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@dep.Symbol</td>
+                                <td>@dep.Name</td>
+                                <td>@dep.Decimals</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <div id='Paging' style="text-align: center;color:blue">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                    of @Model.PageCount
+
+                    @*@Html.PagedListPager(Model, pageindex => Url.Action("Department", new { pageindex }))*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

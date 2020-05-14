@@ -18,11 +18,11 @@ namespace SmartStoreInventoryManagement.Core.Services
         void Add(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         int Total(Expression<Func<TEntity, bool>> predicate);
-        TEntity Find(int id);
+        TEntity Find(Guid id);
         void Delete(TEntity entity);
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate, bool track = false);
         List<TEntity> GetAll(bool track = false);
-        TEntity GetById(int id);
+        TEntity GetById(Guid id);
         TEntity Get(Expression<Func<TEntity, bool>> predicate, bool track = false);
         ParallelQuery<TEntity> GetPagedRecords(string procedure, params object[] @params);
         TEntity GetIncluding(Expression<Func<TEntity, bool>> predicate, bool track = false, params Expression<Func<TEntity, object>>[] properties);
